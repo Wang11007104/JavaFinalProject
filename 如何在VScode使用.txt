@@ -1,0 +1,2 @@
+首先打開終端機(Terminal)然後直接輸入.\gradlew.bat lwjgl3:run
+或是在左邊點Gradle後點lwjgl3後點application後點run
