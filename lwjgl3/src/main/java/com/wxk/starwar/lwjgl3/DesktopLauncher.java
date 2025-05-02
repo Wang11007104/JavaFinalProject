@@ -5,7 +5,11 @@ import java.io.File;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 
+
 public class DesktopLauncher {
+
+    
+
     public static void main (String[] arg) {
 
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
@@ -14,5 +18,6 @@ public class DesktopLauncher {
         config.useVsync(true); // 開啟垂直同步
         config.setForegroundFPS(60); // 設定 FPS 上限
         new Lwjgl3Application(new SkyWizard(), config); // 啟動 MainSpace
+        
     }
 }

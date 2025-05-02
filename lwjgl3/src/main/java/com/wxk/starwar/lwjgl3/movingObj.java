@@ -6,13 +6,15 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class movingObj {
     public Texture texture;
-    public float x, y;
+    public float x, y;//即時的位置
     public float w,h;
     public float vx,vy;
    // public boolean offImage=false;
     public int monMode;
     public boolean showImage=true;
-    public int bloodCount=10;
+    public int bloodCount=10,oriBlood=10;//wizaed.blood
+    public float oriX,oriY;
+    public static float explodeX,explodeY,explodeCount;
 
 
     
@@ -21,11 +23,14 @@ public class movingObj {
         this.texture = new Texture(texturePath);  // 加載飛船圖片
         this.x = startX;  // 設定飛船的 X 座標
         this.y = startY;  // 設定飛船的 Y 座標
+        oriX=startX;
+        oriY=startY;
         this.w=width;
         this.h=height;
         this.monMode=monMode;
         vx=0;
         vy=0;
+
     }
 
     // 更新飛船位置
@@ -49,10 +54,6 @@ public class movingObj {
         y = Math.max(0, Math.min(y, Gdx.graphics.getHeight()+100 - texture.getHeight()));
         }
 
-        
-       // for(movingObj obj:SkyWizard.allObjs){  //loop through SkyWizard下的allObjs
-           // System.out.println(this==obj);
-
            int index = SkyWizard.allObjs.indexOf(this);
            //System.out.println(index);
           //  System.err.println();
@@ -68,21 +69,42 @@ public class movingObj {
 
                     boolean areBullets = (this.monMode<2 && obj.monMode<2);
                     boolean areMonsters = (this.monMode>=2 && this.monMode<100 && obj.monMode>=2 && obj.monMode<100);
-                    if(  !( areBullets )  ){
+                   
+                   
+                    if(!(areMonsters)){
+                   
+                    if(  !( areBullets )  ){// 碰撞扣血
                     this.bloodCount-=1;
                     obj.bloodCount--;
-                    }    
-                    //System.out.println(SkyWizard.wizardPlayer.bloodCount);
-
-
+                    if(this.monMode==1 ){
+                         explodeX=this.x;
+                         explodeY=this.y;
+                         explodeCount=5;
+                    }
+                    if(obj.monMode==1 ){
+                         explodeX=obj.x;
+                         explodeY=obj.y;
+                         explodeCount=5;
+                    }
                     
-                    if(obj!= SkyWizard.wizardPlayer  && obj.bloodCount==0){
+                    
+                    }    
+            
+                    if(obj!= SkyWizard.wizardPlayer  && obj.bloodCount<=0){
                     SkyWizard.allObjs.remove(obj);
+                    SkyWizard.countPoint++;
                     }
-                    if(this!= SkyWizard.wizardPlayer && this.bloodCount==0){
+                    if(this!= SkyWizard.wizardPlayer && this.bloodCount<=0){
                     SkyWizard.allObjs.remove(this);
+                    SkyWizard.countPoint++;
                     }
 
+                    }
+                    
+                    
+                    
+                    
+                    
                     if(SkyWizard.wizardPlayer.bloodCount==0){
                         SkyWizard.stageEvent=100;
                     }
@@ -126,7 +148,16 @@ public class movingObj {
 
 
 
+    public void allRestore(){
+        x=oriX;
+        y=oriY;
+        bloodCount=oriBlood;
+        SkyWizard.firstRender=0;
+        SkyWizard.stageEvent=0;
+        SkyWizard.countPoint=0;
+    }
 
+   
 
 
 
