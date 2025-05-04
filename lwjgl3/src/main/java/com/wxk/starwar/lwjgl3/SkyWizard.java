@@ -166,7 +166,7 @@ public class SkyWizard extends ApplicationAdapter {
         pageButton.setVisible(false);
         pageButton1.setVisible(false);
         break;
-        case "buttonCheat":
+        case "buttonLevel":
       //  System.out.println(" Cheat");
         stageEvent=3;
         break;
@@ -240,7 +240,7 @@ public class SkyWizard extends ApplicationAdapter {
         starButton2=addButton("buttonIns.png", 230, 185,375,100,"buttonIns");
        // starButton2.setVisible(false);
 
-        starButton3=addButton("buttonLevel.png", 200, 50,375,100,"buttonCheat");
+        starButton3=addButton("buttonLevel.png", 200, 50,375,100,"buttonLevel");
        // starButton3.setVisible(false);
 
         pageButton = addButton("insSpace1.png", 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), "insSpace1");
