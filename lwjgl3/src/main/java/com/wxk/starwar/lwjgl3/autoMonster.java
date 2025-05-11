@@ -4,8 +4,11 @@ import com.badlogic.gdx.Gdx;
 
 public class autoMonster extends movingObj {
 
-    private float attackCooldown = 2.0f;  // 每 2 秒射一次
+    private float attackCooldown = 1.0f;  // 每 1 秒射一次
     private float attackTimer = attackCooldown;
+    private float angle = 0f;             // 當前角度
+    private float radius = 100f;          // 半徑
+    private float centerX, centerY;       // 繞圈中心
 
     public autoMonster(String texturePath, float startX, float startY, float width, float height, int monMode, boolean showImage) {
         super(texturePath, startX, startY, width, height, monMode);
@@ -38,7 +41,7 @@ public class autoMonster extends movingObj {
         if (monMode == 88) {
         centerX = this.x;
         centerY = this.y;
-    }
+        }
 
         oriBlood = bloodCount;
     }
@@ -50,7 +53,7 @@ public class autoMonster extends movingObj {
         // 向下子彈
         if (monMode == 0) {
             vx = 0;
-            vy = -300;
+            vy = -100;
             if (y < -150) {
                 vy = 0;
                 showImage = false;
@@ -99,22 +102,23 @@ public class autoMonster extends movingObj {
                 vx = 150;
             }
         }
+        
         if (monMode == 88) {
-            angle += 100 * Gdx.graphics.getDeltaTime();
-            radius += 10 * Gdx.graphics.getDeltaTime(); // 半徑變大
-            float radians = (float)Math.toRadians(angle);
-            x = centerX + radius * (float)Math.cos(radians);
-            y = centerY + radius * (float)Math.sin(radians);
+        angle += 100 * Gdx.graphics.getDeltaTime();
+        radius += 10 * Gdx.graphics.getDeltaTime(); // 半徑變大
+        float radians = (float)Math.toRadians(angle);
+        x = centerX + radius * (float)Math.cos(radians);
+        y = centerY + radius * (float)Math.sin(radians);
         }
         super.update();
 
         // 怪物自動發射子彈
         if (monMode == 2 || monMode == 3 || monMode == 99) {
             attackTimer -= Gdx.graphics.getDeltaTime();
-        if (attackTimer <= 0) {
-            autoMonster bullet = new autoMonster("monfire.png", x + w / 2 - 10, y - 20, 20, 30, 0, true);
-            SkyWizard.allObjs.add(bullet);
-            attackTimer = attackCooldown;
+            if (attackTimer <= 0) {
+                autoMonster bullet = new autoMonster("monfire.png", x + w / 2 - 10, y - 20, 20, 30, 0, true);
+                SkyWizard.allObjs.add(bullet);
+                attackTimer = attackCooldown;
             }
         }
     }
