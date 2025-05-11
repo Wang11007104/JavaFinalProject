@@ -331,7 +331,6 @@ private void scheduleMonsters() {
             stageEvent = 0;
             firstRender = 0;
             countPoint = 0;
-            allObjs.clear();
             allmonsters.clear();
             wizardPlayer.allRestore();
         }
