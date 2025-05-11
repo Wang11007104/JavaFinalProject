@@ -189,28 +189,29 @@ public class SkyWizard extends ApplicationAdapter {
 
     }
     
-    @Override
-    public void create() {
+    private void scheduleMonsters() {
+    timerHandle = new Timer.Task() {
+        public void run() {
+            float screenWidth = Gdx.graphics.getWidth();
+            float screenHeight = Gdx.graphics.getHeight();
 
-        timerHandle = new Timer.Task() {
-    @Override
-    public void run() {
-        float x = MathUtils.random(50, 500); 
-        float y = MathUtils.random(200, 300); 
-        
-        autoMonster m = new autoMonster("ghost.png", x, y, 75, 100, 88, true);
-        SkyWizard.allObjs.add(m);
-        SkyWizard.allmonsters.add(m);
+            float x1 = MathUtils.random(screenWidth * 0.2f, screenWidth * 0.8f);
+            float y1 = MathUtils.random(screenHeight * 0.3f, screenHeight * 0.5f);
+            autoMonster m1 = new autoMonster("ghost.png", x1, y1, 75, 100, 2, true);
+            allObjs.add(m1);
+            allmonsters.add(m1);
+
+            float x2 = MathUtils.random(50, 500);
+            float y2 = MathUtils.random(200, 300);
+            autoMonster m2 = new autoMonster("ghost.png", x2, y2, 75, 100, 88, true);
+            allObjs.add(m2);
+            allmonsters.add(m2);
         }
     };
-        Timer.schedule(timerHandle, 0, 3); 
-
-
-
-
-
-
-
+    Timer.schedule(timerHandle, 0, 4);
+}
+    @Override
+    public void create() {
 
 
 
@@ -350,22 +351,10 @@ public class SkyWizard extends ApplicationAdapter {
 
             //only run once
         if (firstRender == 0 && stageEvent == 1) {
-            timerHandle = new Timer.Task() {
-        public void run() {
-            float screenWidth = Gdx.graphics.getWidth();
-            float screenHeight = Gdx.graphics.getHeight();
-
-            float x = MathUtils.random(screenWidth * 0.2f, screenWidth * 0.8f);
-            float y = MathUtils.random(screenHeight * 0.3f, screenHeight * 0.5f);
-
-            autoMonster m = new autoMonster("ghost.png", x, y, 75, 100, 2, true);
-            SkyWizard.allObjs.add(m);
-            SkyWizard.allmonsters.add(m);
-        }
-    };
-        Timer.schedule(timerHandle, 0, 4);
-        firstRender++;
+            scheduleMonsters();
+            firstRender++;
 }
+
 
 
 
