@@ -69,11 +69,11 @@ public class movingObj {
 
                     boolean areBullets = (this.monMode<2 && obj.monMode<2);
                     boolean areMonsters = (this.monMode>=2 && this.monMode<100 && obj.monMode>=2 && obj.monMode<100);
-                   
+                    boolean monAndMonBu = (this.monMode*obj.monMode==0 && (this.monMode+obj.monMode)>=2 && (this.monMode+obj.monMode)<100);
                    
                     if(!(areMonsters)){
                    
-                    if(  !( areBullets )  ){// 碰撞扣血
+                    if(  !( areBullets )  &&!(monAndMonBu)){// 碰撞扣血
                     this.bloodCount-=1;
                     obj.bloodCount--;
                     if(this.monMode==1 ){
@@ -92,11 +92,15 @@ public class movingObj {
             
                     if(obj!= SkyWizard.wizardPlayer  && obj.bloodCount<=0){
                     SkyWizard.allObjs.remove(obj);
+                    if(!(Math.abs(this.monMode-obj.monMode)==200)){
                     SkyWizard.countPoint++;
+                    }
                     }
                     if(this!= SkyWizard.wizardPlayer && this.bloodCount<=0){
                     SkyWizard.allObjs.remove(this);
+                    if(!(Math.abs(this.monMode-obj.monMode)==200)){
                     SkyWizard.countPoint++;
+                    }
                     }
 
                     }
@@ -152,9 +156,7 @@ public class movingObj {
         x=oriX;
         y=oriY;
         bloodCount=oriBlood;
-        SkyWizard.firstRender=0;
-        SkyWizard.stageEvent=0;
-        SkyWizard.countPoint=0;
+        
     }
 
    

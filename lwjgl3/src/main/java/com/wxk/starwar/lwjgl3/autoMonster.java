@@ -4,8 +4,11 @@ import com.badlogic.gdx.Gdx;
 
 public class autoMonster extends movingObj {
 
-    private float attackCooldown = 2.0f;  // 每 2 秒射一次
+    private float attackCooldown = 1.0f;  // 每 2 秒射一次
     private float attackTimer = attackCooldown;
+    private float angle = 0f;             // 當前角度
+    private float radius = 100f;          // 半徑
+    private float centerX, centerY;
 
     public autoMonster(String texturePath, float startX, float startY, float width, float height, int monMode, boolean showImage) {
         super(texturePath, startX, startY, width, height, monMode);
@@ -28,6 +31,11 @@ public class autoMonster extends movingObj {
                 break;
             case 99: // boss
                 bloodCount = 15;
+                break;
+            case 88:
+                centerX = this.x;
+                centerY = this.y;
+                bloodCount=20;
                 break;
             case 100:
                 bloodCount = 10;
@@ -68,7 +76,7 @@ public class autoMonster extends movingObj {
         }
 
         if (monMode == 2) { // 左右怪（左起）
-            if (x - oriX > -120 || x == bx) {
+            if (x - oriX > -1 || x == bx) {
                 vx = -150;
             } else if (x - oriX < -250 || x == 0) {
                 vx = 150;
@@ -86,6 +94,14 @@ public class autoMonster extends movingObj {
         if (monMode == 4) {
             vx = 0;
             vy = -150;
+        }
+
+        if (monMode == 88) {
+            angle += 100 * Gdx.graphics.getDeltaTime();
+            radius += 10 * Gdx.graphics.getDeltaTime(); // 半徑變大
+            float radians = (float)Math.toRadians(angle);
+            x = centerX + radius * (float)Math.cos(radians);
+            y = centerY + radius * (float)Math.sin(radians);
         }
 
         if (monMode == 99) { // boss

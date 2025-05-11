@@ -67,10 +67,15 @@ public class SkyWizard extends ApplicationAdapter {
     public static ArrayList<movingObj> allmonsters = new ArrayList<>();
     public static int countPoint=0;
     public static int firstRender=0;
+    public static int firstRender1=0;
     private Timer.Task timerHandle;
     private int previousBloodCount=15;
     private float bloodLine;
     private  int monster3OriBlood;
+    private int addMonster=0;
+    private int mp=0;//每擊中20次能釋放大招
+    private boolean ace=false;//放大朝狀態
+    private boolean isWin;
 
     
 
@@ -119,8 +124,23 @@ public class SkyWizard extends ApplicationAdapter {
 
             Sound clickSound = Gdx.audio.newSound(Gdx.files.internal("fire.mp3"));
             clickSound.play();
+            mp++;
+            if(mp>=20){
+                ace=true;
+                mp=0;
+            }
         }
 
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.A) && ace==true){
+            autoMonster wizardBullet = new autoMonster("bigbu.png", wizardPlayer.x-45, wizardPlayer.y+wizardPlayer.h+10, 200, 200, 1,true);
+            wizardBullet.bloodCount=5;
+            allObjs.add(wizardBullet);
+
+            Sound clickSound = Gdx.audio.newSound(Gdx.files.internal("fire.mp3"));
+            clickSound.play();
+            ace=false;
+        }
 
 
     }
@@ -259,8 +279,10 @@ public class SkyWizard extends ApplicationAdapter {
 
         
         monster1 = new autoMonster("wizard.png", 300, 350, 75, 100, 2,true);
-        monster2 = new autoMonster("ghost.png", 400, 350, 75, 100, 3,true);
         monster3 = new autoMonster("dragon1.png", 300, 500, 300, 300, 99,true);
+        monster2 = new autoMonster("redboss.png", 150, 500, 300, 300, 88,true);
+
+
         allmonsters.add(monster1);
         allmonsters.add(monster3);
         //allmonsters.add(new autoMonster(null, countPoint, stageEvent, firstRender, countTimer, countPoint, showImage)) //fornewone
@@ -299,6 +321,30 @@ public class SkyWizard extends ApplicationAdapter {
 
         countTimer++;
 
+
+
+        if (stageEvent == 200) {  // 結算畫面
+            batch.begin();
+            font.getData().setScale(3f);
+            font.setColor(Color.WHITE);
+        if (isWin) {
+            font.draw(batch, "YOU WIN!", 180, 600);
+        } else {
+            font.draw(batch, "YOU LOSE", 180, 600);
+        }
+            font.getData().setScale(2f);
+            font.draw(batch, "SCORE: " + countPoint, 200, 500);
+            font.draw(batch, "Use mouse to click anywhere to return", 60, 400);
+            batch.end();
+
+        if (Gdx.input.justTouched() ) {
+            
+            SkyWizard.countPoint=0;
+            stageEvent = 0;
+
+        }
+        return;  
+        }
        
 
         
@@ -426,7 +472,9 @@ public class SkyWizard extends ApplicationAdapter {
         if(allObjs.contains(monster3)!=true ){  //win the game禽賊先擒王
             //還須設置按鈕
             allObjs.clear();
+            if (timerHandle != null){
             timerHandle.cancel();
+             }
             System.out.println("win");
             allObjs.add(monster3);
             allObjs.add(wizardPlayer);
@@ -434,6 +482,10 @@ public class SkyWizard extends ApplicationAdapter {
             allmonsters.forEach(i->i.allRestore()); // 對於每一個項目都做同一件事情
             bloodLine=monster3.w;
             monster3OriBlood=monster3.bloodCount;
+            SkyWizard.firstRender=0;
+            SkyWizard.stageEvent=0;
+            isWin=true;
+            stageEvent=200;
            
         }
 
@@ -443,7 +495,9 @@ public class SkyWizard extends ApplicationAdapter {
             //還須設置按鈕
 
             allObjs.clear();
+             if (timerHandle != null){
             timerHandle.cancel();
+             }
             System.out.println("lose");
             allObjs.add(monster3);
             allObjs.add(wizardPlayer);
@@ -451,7 +505,10 @@ public class SkyWizard extends ApplicationAdapter {
             allmonsters.forEach(i->i.allRestore()); // 對於每一個項目都做同一件事情
             bloodLine=monster3.w;
             monster3OriBlood=monster3.bloodCount;
-            
+            SkyWizard.firstRender=0;
+            SkyWizard.stageEvent=0;
+            isWin=false;
+            stageEvent=200;
         }
 
 
@@ -531,10 +588,207 @@ public class SkyWizard extends ApplicationAdapter {
             starButton1.setVisible(false);
             starButton2.setVisible(false);
             starButton3.setVisible(false);
+            
+             if(countPoint%100>=10 && allObjs.contains(monster3)==false){
+             if (firstRender1 == 0){
+                allObjs.add(monster2);
+                monster2.allRestore();
+                monster2.bloodCount=countPoint/100*10+20;
+            }
+                firstRender1++;
+            }
+
+            
+
+            
+
+
+
+
+if (countPoint % 10 == 5) {
+    if (firstRender == 0) {
+        timerHandle = new Timer.Task() {
+            @Override
+            public void run() {
+                if (!allObjs.contains(monster1)) {
+                    autoMonster m = new autoMonster("ghost.png", 300, 350, 75, 100, 2, true);
+                    allObjs.add(m);
+                    allmonsters.add(m);
+                    addMonster++;
+
+                    if (addMonster == 5) {
+                         if (timerHandle != null){
+                        this.cancel();
+                           }  // 在這裡取消自己
+                        addMonster = 0; // 重置計數
+                    }
+                }
+            }
+        };
+
+        Timer.schedule(timerHandle, 0, (float)Math.random()*4);
+        firstRender++;
+    }
+    
+}
+    
+
+        //for monster bloood line
+        if(allObjs.contains(monster3)==true){
+
+            
+           
+            
+                
+            if(monster3.bloodCount<previousBloodCount){
+                bloodLine-=(monster3.w)/monster3OriBlood;
+            }
+            
+            shapeRenderer.begin(ShapeRenderer.ShapeType.Filled); // 或 ShapeType.Line 畫框線
+            shapeRenderer.setColor(Color.RED); // 設定顏色
+            shapeRenderer.rect(monster3.x, monster3.y-10, monster3.w, 10);
+            shapeRenderer.setColor(Color.GREEN); // 設定顏色
+            shapeRenderer.rect(monster3.x, monster3.y-10, bloodLine, 10);
+            shapeRenderer.end();
+            previousBloodCount=monster3.bloodCount;
+            
+        }
+        //for monster bloood line
+
+
+
+
+
+            //for back ground white circle
+            float delta = Gdx.graphics.getDeltaTime();
+             for (Circle c : circles) {
+                 c.update(delta);
+             }
+             shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+             shapeRenderer.setColor(0.5f, 0.5f, 0.5f, 1f);
+     
+             for (Circle c : circles) {
+                 shapeRenderer.circle(c.x, c.y, c.radius);
+             }
+             shapeRenderer.end();
+             //for back ground white circle
+
+
+            
+
+
+        
+        keyClicked();
+
+ 
+        for(int i=0;i<allObjs.size();i++){
+            movingObj obj =allObjs.get(i);
+            obj.update();
+            if(obj.showImage){  //利用是否顯示方式關掉圖片
+            obj.draw(batch);
+            }
+        }
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(Color.RED);
+        shapeRenderer.rect(wizardPlayer.x, wizardPlayer.y + wizardPlayer.h + 5, wizardPlayer.w, 6);
+        shapeRenderer.setColor(Color.GREEN);
+        float hpRatio = (float) wizardPlayer.bloodCount / wizardPlayer.oriBlood;
+        shapeRenderer.rect(wizardPlayer.x, wizardPlayer.y + wizardPlayer.h + 5, wizardPlayer.w * hpRatio, 6);
+        shapeRenderer.end();
+ 
+
+
+
+
+        if(stageEvent==100){  //lose
+            //還須設置按鈕
+
+            allObjs.clear();
+            if (timerHandle != null){
+            timerHandle.cancel();
+             }
+            System.out.println("lose");
+            allObjs.add(monster3);
+            allObjs.add(wizardPlayer);
+            wizardPlayer.allRestore();
+            allmonsters.forEach(i->i.allRestore()); // 對於每一個項目都做同一件事情
+            bloodLine=monster3.w;
+            monster3OriBlood=monster3.bloodCount;
+            SkyWizard.firstRender=0;
+            SkyWizard.firstRender1=0;
+            SkyWizard.stageEvent=300;
+            
+        }
+
+
+
+
+            //得分
+            batch.begin();
+            font.draw(batch, "POINT:"+countPoint, 400, 790);
+            batch.end();
+            //得分
+
+
+            if(movingObj.explodeCount>0){
+            SkyWizard.batch.begin();
+            SkyWizard.batch.draw(explode, movingObj.explodeX-20, movingObj.explodeY-20, 100, 100);
+            SkyWizard.batch.end();
+            movingObj.explodeCount--;
+            }
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         }
         
-       
+       if (stageEvent == 300) {  // 結算畫面
+            batch.begin();
+            font.getData().setScale(3f);
+            font.setColor(Color.WHITE);
+        
+            font.draw(batch, "GAME OVER!", 180, 600);
+        
+            font.getData().setScale(2f);
+            font.draw(batch, "SCORE: " + countPoint, 200, 500);
+            font.draw(batch, "Use mouse to click anywhere to return", 60, 400);
+            batch.end();
+
+        if (Gdx.input.justTouched() ) {
+            
+            SkyWizard.countPoint=0;
+            stageEvent = 0;
+
+        }
+        return;  
+        }
         
        
        
