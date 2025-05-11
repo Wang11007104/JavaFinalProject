@@ -149,33 +149,8 @@ public class SkyWizard extends ApplicationAdapter {
 
         switch(clickedButton){
         case "buttonPlay":
-        stageEvent = 1;
-
-        // 清空資料
-        allObjs.clear();
-        allmonsters.clear();
-        countPoint = 0;
-        firstRender = 0;
-
-        if (timerHandle != null) {
-            timerHandle.cancel();
-            timerHandle = null;
-        }
-
-       
-        wizardPlayer = new movingObj("wizard.png", 260, 0, 75, 100, 200);
-        wizardPlayer.allRestore();
-
-        
-        monster3 = new autoMonster("dragon1.png", 300, 500, 300, 300, 99, true);
-        monster3OriBlood = monster3.bloodCount;
-        previousBloodCount = monster3.bloodCount;
-        bloodLine = monster3.w;
-
-        
-        allObjs.add(wizardPlayer);
-        allObjs.add(monster3);
-        allmonsters.add(monster3);
+       // System.out.println("Play" );
+        stageEvent=1;
         break;
         case "buttonIns":
        // System.out.println(" Ins");
@@ -214,7 +189,7 @@ public class SkyWizard extends ApplicationAdapter {
 
     }
     
-    private void scheduleMonsters() {
+private void scheduleMonsters() {
     timerHandle = new Timer.Task() {
         public void run() {
             float screenWidth = Gdx.graphics.getWidth();
@@ -237,8 +212,6 @@ public class SkyWizard extends ApplicationAdapter {
 }
     @Override
     public void create() {
-
-
 
         backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("bgm.mp3"));
         
@@ -295,7 +268,18 @@ public class SkyWizard extends ApplicationAdapter {
 
 
         
-        
+        monster1 = new autoMonster("wizard.png", 300, 350, 75, 100, 2,true);
+        monster2 = new autoMonster("ghost.png", 400, 350, 75, 100, 3,true);
+        monster3 = new autoMonster("dragon1.png", 300, 500, 300, 300, 99,true);
+        allmonsters.add(monster1);
+        allmonsters.add(monster3);
+        //allmonsters.add(new autoMonster(null, countPoint, stageEvent, firstRender, countTimer, countPoint, showImage)) //fornewone
+       
+
+
+        allObjs.add(wizardPlayer);
+       // allObjs.add(monster1);
+        allObjs.add(monster3);
         
        
         
@@ -309,6 +293,13 @@ public class SkyWizard extends ApplicationAdapter {
         }  
 
 
+
+
+        
+
+        bloodLine=monster3.w;
+        monster3OriBlood=monster3.bloodCount;
+
     }
 
     @Override
@@ -316,9 +307,9 @@ public class SkyWizard extends ApplicationAdapter {
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // 清除畫面
 
-        countTimer++;
-
-        if (stageEvent == 10) {  // 結算畫面
+        countTimer++;         
+               
+        if (stageEvent == 200) {  // 結算畫面
             batch.begin();
             font.getData().setScale(3f);
             font.setColor(Color.WHITE);
@@ -345,14 +336,8 @@ public class SkyWizard extends ApplicationAdapter {
             wizardPlayer.allRestore();
         }
         return;  
-    
-        
-    
+        }
 
-       
-
-              
-               
       //  System.out.println(stageEvent);
         if(stageEvent==0){  //  開始畫面
             starButton1.setVisible(true);
@@ -387,7 +372,6 @@ public class SkyWizard extends ApplicationAdapter {
             scheduleMonsters();
             firstRender++;
 }
-
 
 
 
@@ -458,20 +442,39 @@ public class SkyWizard extends ApplicationAdapter {
         }*/
 
 
-        if (!allObjs.contains(monster3)) {
+        if(allObjs.contains(monster3)!=true ){  //win the game禽賊先擒王
+            //還須設置按鈕
             allObjs.clear();
-            if (timerHandle != null) timerHandle.cancel();
-            isWin = true;
-            stageEvent = 10;
+            timerHandle.cancel();
+            System.out.println("win");
+            allObjs.add(monster3);
+            allObjs.add(wizardPlayer);
+            wizardPlayer.allRestore();
+            allmonsters.forEach(i->i.allRestore()); // 對於每一個項目都做同一件事情
+            bloodLine=monster3.w;
+            monster3OriBlood=monster3.bloodCount;
+           
+            isWin = true;              
+            stageEvent = 200;
         }
 
 
 
-        if (stageEvent == 100) {
+        if(stageEvent==100){  //lose
+            //還須設置按鈕
+
             allObjs.clear();
-            if (timerHandle != null) timerHandle.cancel();
-            isWin = false;
-            stageEvent = 10;
+            timerHandle.cancel();
+            System.out.println("lose");
+            allObjs.add(monster3);
+            allObjs.add(wizardPlayer);
+            wizardPlayer.allRestore();
+            allmonsters.forEach(i->i.allRestore()); // 對於每一個項目都做同一件事情
+            bloodLine=monster3.w;
+            monster3OriBlood=monster3.bloodCount;
+
+            isWin = false;              
+            stageEvent = 200;
         }
 
 
