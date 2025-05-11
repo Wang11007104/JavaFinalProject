@@ -154,7 +154,6 @@ public class movingObj {
         bloodCount=oriBlood;
         SkyWizard.firstRender=0;
         SkyWizard.stageEvent=0;
-        SkyWizard.countPoint=0;
     }
 
    
