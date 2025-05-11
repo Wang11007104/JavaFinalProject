@@ -262,7 +262,6 @@ public class SkyWizard extends ApplicationAdapter {
         monster2 = new autoMonster("ghost.png", 400, 350, 75, 100, 3,true);
         monster3 = new autoMonster("dragon1.png", 300, 500, 300, 300, 99,true);
         allmonsters.add(monster1);
-        allmonsters.add(monster2);
         allmonsters.add(monster3);
         //allmonsters.add(new autoMonster(null, countPoint, stageEvent, firstRender, countTimer, countPoint, showImage)) //fornewone
        
@@ -270,7 +269,6 @@ public class SkyWizard extends ApplicationAdapter {
 
         allObjs.add(wizardPlayer);
        // allObjs.add(monster1);
-        allObjs.add(monster2);
         allObjs.add(monster3);
         
        
@@ -344,7 +342,7 @@ public class SkyWizard extends ApplicationAdapter {
                 timerHandle=new Timer.Task() {
                 public void run() {
                     if(true || allObjs.contains(monster1)==false){
-                        autoMonster m=new autoMonster("wizard.png", 300, 350, 75, 100, 2,true);
+                        autoMonster m=new autoMonster("ghost.png", 300, 350, 75, 100, 2,true);
                         allObjs.add(m);  // 加進敵人列表
                         allmonsters.add(m);
                          
@@ -412,7 +410,13 @@ public class SkyWizard extends ApplicationAdapter {
             obj.draw(batch);
             }
         }
-
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(Color.RED);
+        shapeRenderer.rect(wizardPlayer.x, wizardPlayer.y + wizardPlayer.h + 5, wizardPlayer.w, 6);
+        shapeRenderer.setColor(Color.GREEN);
+        float hpRatio = (float) wizardPlayer.bloodCount / wizardPlayer.oriBlood;
+        shapeRenderer.rect(wizardPlayer.x, wizardPlayer.y + wizardPlayer.h + 5, wizardPlayer.w * hpRatio, 6);
+        shapeRenderer.end();
  /* 
         if(allObjs.size()==1){
             stageEvent=11;
