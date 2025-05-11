@@ -320,19 +320,14 @@ private void scheduleMonsters() {
         }
             font.getData().setScale(2f);
             font.draw(batch, "SCORE: " + countPoint, 200, 500);
-            font.draw(batch, "Click anywhere to return", 130, 400);
+            font.draw(batch, "Use mouse to click anywhere to return", 60, 400);
             batch.end();
 
-        if (Gdx.input.justTouched()) {
-            if (timerHandle != null) {
-                timerHandle.cancel();
-                timerHandle = null;
-            }
+        if (Gdx.input.justTouched() ) {
+            
+            SkyWizard.countPoint=0;
             stageEvent = 0;
-            firstRender = 0;
-            countPoint = 0;
-            allmonsters.clear();
-            wizardPlayer.allRestore();
+
         }
         return;  
         }
