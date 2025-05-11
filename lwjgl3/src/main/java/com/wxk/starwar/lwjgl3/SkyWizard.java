@@ -283,7 +283,7 @@ private void scheduleMonsters() {
         shapeRenderer = new ShapeRenderer();
 
 
-        wizardPlayer = new movingObj("wizard.png", 260, 0, 75,100,200);
+        wizardPlayer = new movingObj("wizard.png", 260, 0, 75/2,100/2,200);
 
 
 
@@ -575,13 +575,16 @@ private void scheduleMonsters() {
 
 
 
-        if(stageEvent==3){
+        if(stageEvent==3){ //lv
             starButton1.setVisible(false);
             starButton2.setVisible(false);
             starButton3.setVisible(false);
+
+            
             
              if(countPoint%100>=10 && allObjs.contains(monster3)==false){
              if (firstRender1 == 0){
+                scheduleMonsters();
                 allObjs.add(monster2);
                 monster2.allRestore();
                 monster2.bloodCount=countPoint/100*10+20;

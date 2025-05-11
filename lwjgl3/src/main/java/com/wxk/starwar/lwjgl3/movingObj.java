@@ -12,7 +12,7 @@ public class movingObj {
    // public boolean offImage=false;
     public int monMode;
     public boolean showImage=true;
-    public int bloodCount=10,oriBlood=10;//wizaed.blood
+    public int bloodCount=20,oriBlood=20;//wizaed.blood
     public float oriX,oriY;
     public static float explodeX,explodeY,explodeCount;
 
