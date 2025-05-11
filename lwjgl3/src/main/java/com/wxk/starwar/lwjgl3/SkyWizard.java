@@ -209,19 +209,29 @@ public class SkyWizard extends ApplicationAdapter {
 
     }
     
+private void scheduleMonsters() {
+    timerHandle = new Timer.Task() {
+        public void run() {
+            float screenWidth = Gdx.graphics.getWidth();
+            float screenHeight = Gdx.graphics.getHeight();
+
+            float x1 = MathUtils.random(screenWidth * 0.2f, screenWidth * 0.8f);
+            float y1 = MathUtils.random(screenHeight * 0.3f, screenHeight * 0.5f);
+            autoMonster m1 = new autoMonster("ghost.png", x1, y1, 75, 100, 2, true);
+            allObjs.add(m1);
+            allmonsters.add(m1);
+
+            float x2 = MathUtils.random(50, 500);
+            float y2 = MathUtils.random(200, 300);
+            autoMonster m2 = new autoMonster("ghost.png", x2, y2, 75, 100, 88, true);
+            allObjs.add(m2);
+            allmonsters.add(m2);
+        }
+    };
+    Timer.schedule(timerHandle, 0, 4);
+}
     @Override
     public void create() {
-
-
-
-
-
-
-
-
-
-
-
 
         backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("bgm.mp3"));
         
@@ -319,10 +329,8 @@ public class SkyWizard extends ApplicationAdapter {
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // 清除畫面
 
-        countTimer++;
-
-
-
+        countTimer++;         
+               
         if (stageEvent == 200) {  // 結算畫面
             batch.begin();
             font.getData().setScale(3f);
@@ -345,15 +353,7 @@ public class SkyWizard extends ApplicationAdapter {
         }
         return;  
         }
-       
 
-        
-    
-
-       
-
-              
-               
       //  System.out.println(stageEvent);
         if(stageEvent==0){  //  開始畫面
             starButton1.setVisible(true);
@@ -384,21 +384,10 @@ public class SkyWizard extends ApplicationAdapter {
 
 
             //only run once
-            if(firstRender==0){
-                timerHandle=new Timer.Task() {
-                public void run() {
-                    if(true || allObjs.contains(monster1)==false){
-                        autoMonster m=new autoMonster("ghost.png", 300, 350, 75, 100, 2,true);
-                        allObjs.add(m);  // 加進敵人列表
-                        allmonsters.add(m);
-                         
-                    }
-                }
-            };
-            
-            Timer.schedule(timerHandle, 0, 2);
+        if (firstRender == 0 && stageEvent == 1) {
+            scheduleMonsters();
             firstRender++;
-        }
+}
 
 
 
@@ -487,6 +476,8 @@ public class SkyWizard extends ApplicationAdapter {
             isWin=true;
             stageEvent=200;
            
+            isWin = true;              
+            stageEvent = 200;
         }
 
 
