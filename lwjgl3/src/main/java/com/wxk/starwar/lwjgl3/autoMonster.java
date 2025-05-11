@@ -35,6 +35,10 @@ public class autoMonster extends movingObj {
             default:
                 break;
         }
+        if (monMode == 88) {
+        centerX = this.x;
+        centerY = this.y;
+    }
 
         oriBlood = bloodCount;
     }
@@ -95,16 +99,22 @@ public class autoMonster extends movingObj {
                 vx = 150;
             }
         }
-
+        if (monMode == 88) {
+            angle += 100 * Gdx.graphics.getDeltaTime();
+            radius += 10 * Gdx.graphics.getDeltaTime(); // 半徑變大
+            float radians = (float)Math.toRadians(angle);
+            x = centerX + radius * (float)Math.cos(radians);
+            y = centerY + radius * (float)Math.sin(radians);
+        }
         super.update();
 
         // 怪物自動發射子彈
         if (monMode == 2 || monMode == 3 || monMode == 99) {
             attackTimer -= Gdx.graphics.getDeltaTime();
-            if (attackTimer <= 0) {
-                autoMonster bullet = new autoMonster("monfire.png", x + w / 2 - 10, y - 20, 20, 30, 0, true);
-                SkyWizard.allObjs.add(bullet);
-                attackTimer = attackCooldown;
+        if (attackTimer <= 0) {
+            autoMonster bullet = new autoMonster("monfire.png", x + w / 2 - 10, y - 20, 20, 30, 0, true);
+            SkyWizard.allObjs.add(bullet);
+            attackTimer = attackCooldown;
             }
         }
     }
