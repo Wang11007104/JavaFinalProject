@@ -192,7 +192,18 @@ public class SkyWizard extends ApplicationAdapter {
     @Override
     public void create() {
 
-
+        timerHandle = new Timer.Task() {
+    @Override
+    public void run() {
+        float x = MathUtils.random(50, 500); 
+        float y = MathUtils.random(200, 300); 
+        
+        autoMonster m = new autoMonster("ghost.png", x, y, 75, 100, 88, true);
+        SkyWizard.allObjs.add(m);
+        SkyWizard.allmonsters.add(m);
+        }
+    };
+        Timer.schedule(timerHandle, 0, 3); 
 
 
 
@@ -338,21 +349,23 @@ public class SkyWizard extends ApplicationAdapter {
 
 
             //only run once
-            if(firstRender==0){
-                timerHandle=new Timer.Task() {
-                public void run() {
-                    if(true || allObjs.contains(monster1)==false){
-                        autoMonster m=new autoMonster("ghost.png", 300, 350, 75, 100, 2,true);
-                        allObjs.add(m);  // 加進敵人列表
-                        allmonsters.add(m);
-                         
-                    }
-                }
-            };
-            
-            Timer.schedule(timerHandle, 0, 2);
-            firstRender++;
+        if (firstRender == 0 && stageEvent == 1) {
+            timerHandle = new Timer.Task() {
+        public void run() {
+            float screenWidth = Gdx.graphics.getWidth();
+            float screenHeight = Gdx.graphics.getHeight();
+
+            float x = MathUtils.random(screenWidth * 0.2f, screenWidth * 0.8f);
+            float y = MathUtils.random(screenHeight * 0.3f, screenHeight * 0.5f);
+
+            autoMonster m = new autoMonster("ghost.png", x, y, 75, 100, 2, true);
+            SkyWizard.allObjs.add(m);
+            SkyWizard.allmonsters.add(m);
         }
+    };
+        Timer.schedule(timerHandle, 0, 4);
+        firstRender++;
+}
 
 
 
