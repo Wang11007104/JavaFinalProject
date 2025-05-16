@@ -4,13 +4,34 @@ import com.badlogic.gdx.Gdx;
 
 public class autoMonster extends movingObj {
 
-    private float attackCooldown = 1.0f;  // 每 1 秒射一次
+    private float attackCooldown = 1.0f; // 每 1 秒射一次
     private float attackTimer = attackCooldown;
-    private float angle = 0f;             // 當前角度
-    private float radius = 100f;          // 半徑
-    private float centerX, centerY;       // 繞圈中心
+    private float angle = 0f; // 當前角度
+    private float radius = 100f; // 半徑
+    private float centerX, centerY; // 繞圈中心
 
-    public autoMonster(String texturePath, float startX, float startY, float width, float height, int monMode, boolean showImage) {
+    /**
+     * 建立一個自動移動的怪物或子彈物件，並根據 monMode 設定其初始狀態。
+     * 包含設定生命值（bloodCount）、初始座標、是否顯示圖片等屬性。
+     *
+     * 血量會依照 monMode 決定，例如：
+     * - 0, 1：子彈，血量為 1
+     * - 2：左右移動怪，血量為 3
+     * - 3, 4：普通怪物，血量為 2
+     * - 88：旋轉怪物，血量為 10（並記錄中心點）
+     * - 99：Boss，血量為 15
+     * - 100：特殊怪，血量為 20
+     *
+     * @param texturePath 圖片路徑，用於載入貼圖
+     * @param startX      初始 X 座標
+     * @param startY      初始 Y 座標
+     * @param width       寬度
+     * @param height      高度
+     * @param monMode     行為模式代號
+     * @param showImage   是否顯示圖片
+     */
+    public autoMonster(String texturePath, float startX, float startY, float width, float height, int monMode,
+            boolean showImage) {
         super(texturePath, startX, startY, width, height, monMode);
         this.monMode = monMode;
         this.showImage = showImage;
@@ -35,22 +56,36 @@ public class autoMonster extends movingObj {
             case 88:
                 centerX = this.x;
                 centerY = this.y;
-                bloodCount=20;
+                bloodCount = 10;
                 break;
             case 100:
-                bloodCount = 10;
+                bloodCount = 20;
                 break;
             default:
                 break;
         }
         if (monMode == 88) {
-        centerX = this.x;
-        centerY = this.y;
+            centerX = this.x;
+            centerY = this.y;
         }
 
         oriBlood = bloodCount;
     }
 
+    /**
+     * 更新物件的狀態，包括位置、移動方向、角度與發射邏輯。
+     * 根據 monMode 值，決定不同的移動模式（例如子彈向上/向下、怪物左右移動、Boss行為等）。
+     * 當物件超出畫面邊界時會移除自身，某些模式下會自動發射子彈。
+     *
+     * monMode 說明：
+     * 0 - 敵方子彈（向下移動）
+     * 1 - 主角子彈（向上移動）
+     * 2 - 怪物左右移動（從左側起始）
+     * 3 - 怪物左右移動（從右側起始）
+     * 4 - 垂直下降
+     * 88 - 螺旋或圓形移動
+     * 99 - Boss 左右移動並自動攻擊
+     */
     public void update() {
         float bx = Gdx.graphics.getWidth() - texture.getWidth();
         float by = Gdx.graphics.getHeight() - texture.getHeight();
@@ -103,9 +138,9 @@ public class autoMonster extends movingObj {
         if (monMode == 88) {
             angle += 100 * Gdx.graphics.getDeltaTime();
             radius += 10 * Gdx.graphics.getDeltaTime(); // 半徑變大
-            float radians = (float)Math.toRadians(angle);
-            x = centerX + radius * (float)Math.cos(radians);
-            y = centerY + radius * (float)Math.sin(radians);
+            float radians = (float) Math.toRadians(angle);
+            x = centerX + radius * (float) Math.cos(radians);
+            y = centerY + radius * (float) Math.sin(radians);
         }
 
         if (monMode == 99) { // boss
@@ -115,13 +150,13 @@ public class autoMonster extends movingObj {
                 vx = 150;
             }
         }
-        
+
         if (monMode == 88) {
-        angle += 100 * Gdx.graphics.getDeltaTime();
-        radius += 10 * Gdx.graphics.getDeltaTime(); // 半徑變大
-        float radians = (float)Math.toRadians(angle);
-        x = centerX + radius * (float)Math.cos(radians);
-        y = centerY + radius * (float)Math.sin(radians);
+            angle += 100 * Gdx.graphics.getDeltaTime();
+            radius += 10 * Gdx.graphics.getDeltaTime(); // 半徑變大
+            float radians = (float) Math.toRadians(angle);
+            x = centerX + radius * (float) Math.cos(radians);
+            y = centerY + radius * (float) Math.sin(radians);
         }
         super.update();
 
