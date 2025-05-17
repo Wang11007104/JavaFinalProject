@@ -177,475 +177,71 @@ JavaFinalProject\assets/
 
 ```mermaid
 classDiagram
-    class Constants {
-        <<static>>
-        +int FRAMEWIDTH
-        +int FRAMEHEIGHT
-        +int PLAYERWIDTH
-        +int PLAYERHEIGHT
-        +int PLAYERMAXLEVEL
-        +int PLAYERESTUSNUM
-        +int PLAYERINITIALEXP
-        +int TRIANGLEWIDTH
-        +int TRIANGLEHEIGHT
-        +int TRIANGLEATTACKSTARTTIME
-        +int TRIANGLEATTACKENDTIME
-        +int TRIANGLEATTACKCOOLDOWN
-        +int SMALLTRIANGLEDETECTZONE
-        +int TRIANGLEDETECTZONE
-        +int BIGTRIANGLEDETECTZONE
-        +int playerHPLevel
-        +int playerHPLevelTemp
-        +double playerActualHP
-        +int playerSTRLevel
-        +int playerSTRLevelTemp
-        +double playerActualSTR
-        +int playerDEXLevel
-        +int playerDEXLevelTemp
-        +double playerActualDEX
-        +double playerActualEnergy
-        +double playerActualSpeed
-        +int levelUpCost
-        +float currentVolume
-        +int nRuns
-
-        +double getActualHP()
-        +double getActualSTR()
-        +double getActualDEX()
-        +double getActualEnergy()
-        +double levelUpCost()
-        +double nextLevelUpCost()
+        SkyWizard <|-- movingObj
+        movingObj <|-- autoMonster
+         SkyWizard o-- "*" Circle
+    class SkyWizard {
+        +create()
+        +render()
+        +dispose()
+        -keyClicked()
+        -scheduleMonsters()
+        -addButton(picPath, x, y, w, h, buttonName)
+        int stageEvent
+        boolean showImage
+        boolean ace
+        boolean isWin
+        int countPoint
     }
 
-    class Player {
-        -double x
-        -double y
-        -final int width
-        -final int height
-        -final Color color
-        -int speed
-        -int currentHealth
-        -double currentEnergy
-        -int exp
-        -int estus
-        -boolean invincible
-        -boolean attacking
-        -boolean healing
-        -int attackCoolDown
-        -int healingTimer
-        -int healingCoolDown
-        -boolean dodging
-        -int dodgeTimer
-        -int dodgeCoolDown
-        +double dodgedx
-        +double dodgedy
-        +double dodgeSpeed
-        -boolean knockBacking
-        +double knockBackdx
-        +double knockBackdy
-        +int knockBackSpeed
-        +int knockBackTimer
-        +int knockBackCoolDown
-
-        +Player(int, int, int, int, Color, int, int)
-        +void move(boolean, boolean, boolean, boolean)
-        +void dodge(boolean, boolean, boolean, boolean)
-        +void knockBack(double, double, int, int)
-        +void attack()
-        +void getHurt(int)
-        +boolean isAttacking()
-        +boolean isKnockBacking()
-        +boolean isDodging()
-        +boolean isHealing()
-        +boolean isInvincible()
-        +void draw(Graphics)
-        +int getHealth()
-        +void increaseHealth()
-        +void restoreHealth()
-        +void restoreEnergy()
-        +int getEstus()
-        +void restoreEstus()
-        +void increaseExp(int)
-        +void decreaseExp(int)
-        +int getExp()
-        +int getEnergy()
-        +double getX()
-        +double getY()
-        +double getCenterX()
-        +double getCenterY()
-        +int getWidth()
-        +Rectangle getBounds()
-    }
-    
-    Player --> Constants
-    
-    class PlayerUI {
-        +static void draw(Graphics g, int maxHealth, int currentHealth, int maxEnergy, int currentEnergy, int exp, int estus)
-    }
-    
-    PlayerUI --> Player
-
-    class Enemy {
-        - double x
-        - double y
-        - int width
-        - int height
-        - Color oriColor
-        - Color color
-        - int maxHealth
-        - int currentHealth
-        - int speed
-        - int state
-        - boolean attacking
-        - boolean knockBacking
-        - boolean damagePlayer
-        - boolean getHurting
-        - int getHurtCounter
-        - int getHurtTimer
-        - int attackDamage
-        - double knockBackdx
-        - double knockBackdy
-        - int knockBackSpeed
-        - int knockBackTimer
-        - int detectZone
-        + Enemy()
-        + Enemy(int, int, int, int, Color, int, int, int)
-        + void move(double, double)
-        + void stateIdle(double, double)
-        + void stateMove(double, double)
-        + void stateKnockBack()
-        + void getHurt(int)
-        + void knockBack(double, double, int, int)
-        + void draw(Graphics)
-        + double getCenterX()
-        + double getCenterY()
-        + double getMaxHealth()
-        + double getHealth()
-        + int getDamage()
-        + boolean isAttacking()
-        + Rectangle getBounds()
-    }
-    
-    Enemy --> Constants
-
-    class Triangle {
-        + double centerX
-        + double centerY
-        + double dx
-        + double dy
-        + int[] xPoints
-        + int[] yPoints
-        + double attackdx
-        + double attackdy
-        + int attackSpeed
-        + int attackTimer
-        + int attackStartTime
-        + int attackEndTime
-        + int attackCoolDown
-        + Triangle(int, int, int, int, Color, int, int, int)
-        + void move(double, double)
-        + void stateIdle(double, double)
-        + void stateMove(double, double)
-        + void stateKnockBack()
-        + void stateAttack(double, double)
-        + void rotateTri()
-        + void draw(Graphics)
-        + double getCenterX()
-        + double getCenterY()
-        + double getHealth()
-        + boolean isAttacking()
-        + Rectangle getBounds()
+    class Circle {
+        +update(delta)
+        -reset()
+        float x
+        float y
+        float radius
+        float speedY
     }
 
-    Triangle --|> Enemy
-    Triangle --> Constants
-    
-    class BigTriangle {
-        - int phase
-        - int moveType
-        - int moveTypeTimer
-        - int attackType
-        - int attackTypeCounter
-        - double rotationRadius
-        - int rotateDirection
-        - boolean isSummoned
-        - int phaseChangeTimer
-        - List<Enemy> enemiesToAdd
-        + BigTriangle(int x, int y, int w, int h, Color c, int attackDamage, int health, int detectZone)
-        + void move(double playerX, double playerY)
-        + void draw(Graphics g)
-        + void stateIdle(double playerX, double playerY)
-        + void stateMove(double playerX, double playerY)
-        + void stateAttack(double playerX, double playerY)
-        + void statePhaseChange()
-        + void getHurt(int damage)
-        + int getDamage()
-        + void stateKnockBack()
-        + void knockBack(double x, double y, int s, int t)
-        + void sprintAttack(double playerX, double playerY)
-        + void heavyAttack(double playerX, double playerY)
-        + void sprintsprintAttack(double playerX, double playerY)
-        + void summonTriangleMinions(int num)
-        + int getPhase()
-    }
-    
-    BigTriangle --|> Triangle
-    BigTriangle --> Constants
-
-    class Bullet {
-        - double x
-        - double y
-        - int width
-        - int height
-        - Color color
-        - int speed
-        - int damage
-        - double dx
-        - double dy
-        + Bullet(int x, int y, int w, int h, Color c, double dx, double dy)
-        + void move()
-        + int getDamage()
-        + boolean outOfScreen()
-        + int getWidth()
-        + int getHeight()
-        + void draw(Graphics g)
-        + Rectangle getBounds()
-    }
-    
-    Bullet --> Player
-    
-    class Coin {
-        - double x
-        - double y
-        - int width
-        - int height
-        - int exp
-        - Color color
-        - int[] xPoints
-        - int[] yPoints
-        - double dx
-        - double dy
-        + Coin(double x, double y, int exp)
-        + void move()
-        + void draw(Graphics g)
-        + int getExp()
-        + Rectangle getBounds()
-    }
-    
-    Coin --> Player
-
-    class CampFire {
-        - int x
-        - int y
-        - int width
-        - int interactWidth
-        - int height
-        + CampFire(int x, int y)
-        + void draw(Graphics g)
-        + void drawText(Graphics g)
-        + int getCenterX()
-        + int getCenterY()
-        + int getWidth()
-        + Rectangle getBounds()
-    }
-    
-    CampFire --> Player
-
-    class Explode {
-        -double x
-        -double y
-        -double centerX
-        -double centerY
-        -double width
-        -double height
-        -double w
-        -double h
-        -Color color
-        -int damage = 15
-        -int maxHealth = 0
-        -int currentHealth = 0
-        +Explode(int x, int y, int w, int h, Color c, int health)
-        +void getHurt(int damage)
-        +void draw(Graphics g)
-        +int getDamage()
-        +double getCenterX()
-        +double getCenterY()
-        +double getHealth()
-        +Rectangle getBounds()
-    }
-    
-    Explode --> Bullet
-
-    class SpaceInvaderPanel {
-        -Timer timer1
-        -Timer timer2
-        -Timer timer3
-        -Timer timer4
-        -ArrayList~Enemy~ enemies
-        -ArrayList~Bullet~ bullets
-        -List~Enemy~ enemiesToAdd
-        -ArrayList~Explode~ explodes
-        -ArrayList~Coin~ coins
-        -Player player
-        -CampFire campFire
-        -boolean paused
-        -boolean playerInput
-        -boolean enemyMove
-        -boolean isGameOver
-        -boolean showBonfireText
-        -boolean inBonfire
-        -int spawnEnemiesMaxDelay
-        -int spawnEnemiesMinDelay
-        -int spawnEnemiesDelay
-        -int spawnEnemiesStep
-        -int bigTriangleDelay
-        -boolean stopSpawmEnemies
-        -boolean enemyFall
-        -boolean changeMusic
-        -boolean wPressed
-        -boolean aPressed
-        -boolean sPressed
-        -boolean dPressed
-        -boolean ePressed
-        -boolean escPressed
-        -int rPressed
-        -int spacePressed
-        -int mouseLeftClicked
-        -int mouseRightClicked
-        -int leftClickX
-        -int leftClickY
-        -JLayeredPane layeredPane
-        -JPanel settingsPanel
-        -GameOverPanel gameOverPanel
-        -LevelUpPanel levelUpPanel
-        -MusicPlayer musicPlayer
-        +SpaceInvaderPanel(JLayeredPane lp)
-        +void spawnEnemies()
-        +void paintComponent(Graphics g)
-        +void actionPerformed(ActionEvent e)
-        +void checkCollisions()
-        +void deleteOutOfScreenBullets()
-        +void pauseGame()
-        +void resumeGame()
-        +void restartGame()
-        +void disablePlayerInput()
-        +void keyPressed(KeyEvent e)
-        +void keyReleased(KeyEvent e)
-        +void keyTyped(KeyEvent e)
-        +void mousePressed(MouseEvent e)
-        +void mouseClicked(MouseEvent e)
-        +void mouseEntered(MouseEvent e)
-        +void mouseExited(MouseEvent e)
-        +void mouseReleased(MouseEvent e)
-        +void setSettingsPanel(SettingsPanel settingPanel)
-        +void setGameOverPanel(GameOverPanel gameOverPanel)
-        +void setLevelUpPanel(LevelUpPanel levelUpPanel)
-        +void setMusicPlayer(MusicPlayer musicPlayer)
+    class movingObj {
+        +update()
+        +draw(batch)
+        +allRestore()
+        +dispose()
+        float x
+        float y
+        float w
+        float h
+        float vx
+        float vy
+        int bloodCount
+        int oriBlood
+        boolean showImage
+        static int explodeCount
+        static float explodeX
+        static float explodeY
     }
 
-    class StartPanel {
-        -SettingsPanel settingsPanel
-        -MusicPlayer musicPlayer
-        +StartPanel(SpaceInvaderPanel gamePanel, MusicPlayer musicPlayer)
-        +void styleTextOnlyButton(JButton button)
-        +void setSettingsPanel(SettingsPanel settingPanel)
-        +void setMusicPlayer(MusicPlayer musicPlayer)
+    class autoMonster {
+        +update()
+        +draw(batch)
+        +allRestore()
+        +dispose()
+        int bloodCount
+        int type
+        boolean isEnemy
     }
 
-class SettingsPanel {
-        -StartPanel startPanel
-        -JLayeredPane layeredPane
-        -boolean isBlackBackground
-        -boolean showResumeButton
-        -MusicPlayer musicPlayer
-        -JButton resumeButton
 
-        +SettingsPanel(SpaceInvaderPanel gamePanel, StartPanel startPanel, JLayeredPane layeredPane, MusicPlayer musicPlayer)
-        +JPanel createVolumeControlPanel()
-        +void customizeButton(JButton button)
-        +void styleTextOnlyButton(JButton button)
-        +void setBlackBackground(boolean isBlackBackground)
-        +void setStartPanel(StartPanel startPanel)
-        +void setMusicPlayer(MusicPlayer musicPlayer)
-        +void showResumeButton(boolean show)
-        +void paintComponent(Graphics g)
-    }
-    
-    class LevelUpPanel {
-        -boolean confirmLevelUp
-        -SpaceInvaderPanel gamePanel
-        -MusicPlayer musicPlayer
-        -JLabel hpTextLabel
-        -JLabel strTextLabel
-        -JLabel dexTextLabel
-        -JLabel totalLevelLabel
-        -JLabel nextLevelUpCostLabel
-        -JLabel currentExpLabel
 
-        +LevelUpPanel(SpaceInvaderPanel gamePanel, MusicPlayer musicPlayer)
-        +JPanel createLevelInfoPanel()
-        +JPanel createLevelControlPanel()
-        +JPanel createConfirmExitPanel()
-        +void addHPUI(JPanel panel)
-        +void addSTRUI(JPanel panel)
-        +void addDEXUI(JPanel panel)
-        +void setupStatPanel(JPanel panel, String labelName, StatGetter baseLevelGetter, StatGetter tempLevelGetter, StatSetter tempLevelSetter, StatLabelSetter textSetter, StatLabelGetter labelGetter)
-        +void confirmLevelUp()
-        +void exitLevelUp()
-        +void updateLevelInfo()
-        +void styleTextOnlyButton(JButton button)
-        +void paintComponent(Graphics g)
-        +void setMusicPlayer(MusicPlayer musicPlayer)
-    }
-    
-    class GameOverPanel {
-        -float alpha
-        -Timer fadeTimer
-        -Timer restartTimer
-        -SpaceInvaderPanel gamePanel
-        -MusicPlayer musicPlayer
-        
-        +GameOverPanel(SpaceInvaderPanel gamePanel, MusicPlayer musicPlayer)
-        +void triggerFadeIn()
-        +void paintComponent(Graphics g)
-    }
-    
-    class MusicPlayer {
-        -Map<String, List<Clip>> clipPool
-        -float currentVolume
-        +MusicPlayer()
-        +void load(String id, String filepath, int count)
-        +void playSegment(String id, float startSec, float endSec, boolean loop)
-        +void stopById(String id)
-        +void stopAll()
-        +void adjustVolume(float delta)
-        +void setVolume(float v)
-        +float getCurrentVolume()
-        +String getVolumeText()
-        -void applyVolume(Clip clip)
-    }
-    
-    
-    
-    SpaceInvaderPanel --> SettingsPanel
-    SpaceInvaderPanel --> LevelUpPanel
-    SpaceInvaderPanel --> GameOverPanel
-    
-    StartPanel --> SpaceInvaderPanel
-    SettingsPanel --> SpaceInvaderPanel
-    LevelUpPanel --> SpaceInvaderPanel
-    GameOverPanel --> SpaceInvaderPanel
-    
-    SpaceInvaderPanel --> MusicPlayer
-    StartPanel --> MusicPlayer
-    SettingsPanel --> MusicPlayer
-    LevelUpPanel --> MusicPlayer
-    GameOverPanel --> MusicPlayer
-    
-    SpaceInvaderPanel --> Constants
-    SettingsPanel --> Constants
-    LevelUpPanel --> Constants
-    GameOverPanel --> Constants
+        class movingObj {
+          -int sizeInFeet
+          -canEat()
+        }
+        class autoMonster {
+          +bool is_wild
+          +run()
+        }
 
 ```
 
