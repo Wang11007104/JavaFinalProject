@@ -310,64 +310,43 @@ flowchart TD
 
 ```mermaid
 sequenceDiagram
-    participant Player
-    participant SpaceInvaderPanel
-    participant Timer1
-    participant Timer2
-    participant Timer3
-    participant Timer4
-    participant Enemy
-    participant Bullet
-    participant Explode
-    participant Coin
-    participant CampFire
-    participant MusicPlayer
-    participant GameOverPanel
-    participant LevelUpPanel
-    participant SettingsPanel
+actor Player
+participant SkyWizard
+participant Stage
+participant ImageButton
+participant "Timer.Task" as Timer
+participant "movingObj / autoMonster" as Object
 
-    SpaceInvaderPanel ->> Player: Create player instance
-    SpaceInvaderPanel ->> CampFire: Create campfire instance
-    SpaceInvaderPanel ->> Timer1: Start timer1 (15ms interval)
-    SpaceInvaderPanel ->> Timer2: Start timer2 (big triangle delay)
-    SpaceInvaderPanel ->> Timer4: Start timer4 (enemy spawn delay)
+Player -> SkyWizard : 啟動遊戲
+SkyWizard -> Stage : setInputProcessor
+SkyWizard -> ImageButton : addButton() / setClickListener
+SkyWizard -> SkyWizard : 初始化資源 / 音樂 / 角色
+Player -> ImageButton : 點擊 [Play]
+ImageButton -> SkyWizard : onClick()\nstageEvent = 1
 
-    Timer1 ->> SpaceInvaderPanel: actionPerformed
-    SpaceInvaderPanel ->> Player: Move player
-    SpaceInvaderPanel ->> Enemy: Move enemies (if enabled)
-    SpaceInvaderPanel ->> Bullet: Move bullets
-    SpaceInvaderPanel ->> SpaceInvaderPanel: Check collisions
-    SpaceInvaderPanel ->> SpaceInvaderPanel: Check bonfire interaction
-    SpaceInvaderPanel ->> SpaceInvaderPanel: Repaint screen
+SkyWizard -> Timer : scheduleMonsters()
+Timer -> Object : 產生 autoMonster
 
-    Timer2 ->> SpaceInvaderPanel: Spawn BigTriangle
-    SpaceInvaderPanel ->> Enemy: Add BigTriangle
-    SpaceInvaderPanel ->> MusicPlayer: Play BigTriangle Phase 1 music
+Player -> SkyWizard : 按鍵操作（移動/SPACE/A）
+SkyWizard -> Object : 建立子彈 / 大招
 
-    Timer3 ->> SpaceInvaderPanel: BigTriangle defeated, play phase 2
-    SpaceInvaderPanel ->> MusicPlayer: Play BigTriangle Phase 2 music
+loop 遊戲進行中
+    SkyWizard -> Object : update()
+    Object -> SkyWizard : 傳回狀態（血量/死亡）
+end
 
-    Timer4 ->> SpaceInvaderPanel: Spawn regular enemies
-    SpaceInvaderPanel ->> Enemy: Create new Triangle instances
-    SpaceInvaderPanel ->> MusicPlayer: Play enemy spawn sound
+SkyWizard -> SkyWizard : 判定勝利或失敗
 
-    SpaceInvaderPanel ->> Bullet: Fire bullet (on left click)
-    SpaceInvaderPanel ->> MusicPlayer: Play fireball sound
+alt 玩家勝利
+    SkyWizard -> Player : 顯示 YOU WIN
+else 玩家失敗
+    SkyWizard -> Player : 顯示 GAME OVER
+end
 
-    SpaceInvaderPanel ->> Player: Dodge (on space press)
-    SpaceInvaderPanel ->> MusicPlayer: Play dodge sound
+Player -> SkyWizard : 點擊螢幕返回
+SkyWizard -> SkyWizard : 重置資料 / 回主畫面
 
-    SpaceInvaderPanel ->> Player: Heal (on 'R' press)
-    SpaceInvaderPanel ->> MusicPlayer: Play heal sound
 
-    SpaceInvaderPanel ->> Player: Game Over (on death)
-    SpaceInvaderPanel ->> GameOverPanel: Trigger game over screen
-    SpaceInvaderPanel ->> MusicPlayer: Play game over sound
 
-    Player ->> CampFire: Check for bonfire interaction
-    SpaceInvaderPanel ->> LevelUpPanel: Show level-up panel on bonfire interaction
-
-    SpaceInvaderPanel ->> SettingsPanel: Pause game on ESC press
-    SpaceInvaderPanel ->> MusicPlayer: Adjust volume on BigTriangle phase change
 
 ```
