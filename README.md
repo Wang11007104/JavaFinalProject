@@ -14,7 +14,7 @@
   撰寫內容(詳情見下方功能表):3~12
   
 - [報告影片連結]()
-[git log連結]([https://www.example.com](https://github.com/Wang11007104/JavaFinalProject/blob/main/commit%E6%AD%B7%E5%8F%B2%E7%B4%80%E9%8C%84.txt))
+- [git log連結]([https://www.example.com](https://github.com/Wang11007104/JavaFinalProject/blob/main/commit%E6%AD%B7%E5%8F%B2%E7%B4%80%E9%8C%84.txt))
 ## 遊戲說明
 
 ### 1. 遊戲流程
