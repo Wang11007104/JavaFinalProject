@@ -17,7 +17,7 @@
 - [報告影片連結]()
 - [git log連結](https://github.com/Wang11007104/JavaFinalProject/blob/main/commit%E6%AD%B7%E5%8F%B2%E7%B4%80%E9%8C%84.txt)
 - [doc.html連結](https://github.com/Wang11007104/JavaFinalProject/tree/main/javadoctop)
-- 
+- [.jar檔連結](https://github.com/Wang11007104/JavaFinalProject/tree/main/libs)
 ## 遊戲說明
 
 ### 1. 遊戲流程
@@ -34,7 +34,7 @@
 
 ### 下載完整repo後開啟Terminal執行以下指令
 ```
-cd .\lwjgl3\build\libs\
+cd .\libs\
 java -jar starwar-1.0.0.jar
 ```
 
