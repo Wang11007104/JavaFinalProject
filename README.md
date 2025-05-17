@@ -7,7 +7,7 @@
 - 分工說明：
   
   王星凱:
-  程式架構、功能構想、程式介紹
+  程式架構、遊戲介面、功能構想與實現、程式介紹、完善.md檔、git log、流程圖、類別圖、時序圖
   撰寫內容(詳情見下方功能表):1~12
   
   連羽健:
@@ -346,6 +346,14 @@ end
 
 Player -> SkyWizard : 點擊螢幕返回
 SkyWizard -> SkyWizard : 重置資料 / 回主畫面
+
+## 五、與 ChatGPT 的協作紀錄摘要
+- 學習LibGDX框架與語法(create、render、左下角為(0，0)、圖片呼叫方式)
+- 版本與libGDX相容性
+- 修整build.gradle的各種設定
+- vscode與libGDX的相容性
+- 不同大小圓點由上而下寫法
+
 
 
 
