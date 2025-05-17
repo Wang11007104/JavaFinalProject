@@ -16,7 +16,7 @@
   
 - [報告影片連結]()
 - [git log連結](https://github.com/Wang11007104/JavaFinalProject/blob/main/commit%E6%AD%B7%E5%8F%B2%E7%B4%80%E9%8C%84.txt)
-- [doc.html連結](file:///C:/Users/User/OneDrive/Documents/JavaFinalProject/lwjgl3/build/docs/javadoc/com/wxk/starwar/lwjgl3/SkyWizard.html)
+- [doc.html連結](https://github.com/Wang11007104/JavaFinalProject/tree/main/javadoctop)
 - 
 ## 遊戲說明
 
