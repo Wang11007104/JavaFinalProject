@@ -653,66 +653,60 @@ class SettingsPanel {
 
 ```mermaid
 flowchart TD
-    A[Start] --> B{Game Running?}
-    B -->|Yes| C[Check Player Input]
-    B -->|No| D[Show Game Over]
 
-    C --> E{Is Game Paused?}
-    E -->|Yes| F[Pause Game]
-    E -->|No| G[Update Player Movement]
+    Start(["Start"]) --> Create["create(): 初始化資源、角色、按鈕、背景音樂"]
+    Create --> Render["render(): 遊戲主迴圈"]
 
-    G --> H{Is Enemy Movement Enabled?}
-    H -->|Yes| I[Move Enemies]
-    H -->|No| J[Do Nothing]
+    Render --> CheckStageEvent{"stageEvent 值?"}
 
-    G --> K[Handle Bullets]
+    %% ========== Main Menu ==========
+    CheckStageEvent -- 0 --> Menu["顯示主選單 (firstscreen.png)"]
+    Menu --> BtnPlay["點擊 buttonPlay"] -->|stageEvent=1| Render
+    Menu --> BtnIns["點擊 buttonIns"] -->|stageEvent=2| Render
+    Menu --> BtnLevel["點擊 buttonLevel"] -->|stageEvent=3| Render
 
-    K --> L[Check Bullet Collision with Enemy]
-    L --> M{Bullet Hits Enemy?}
-    M -->|Yes| N[Trigger Explosion and Remove Bullet]
-    M -->|No| O[Continue Moving Bullets]
+    %% ========== Instruction Pages ==========
+    CheckStageEvent -- 2 --> Instruction1["顯示說明頁面 insSpace1"]
+    Instruction1 --> ClickTo21["點擊螢幕"] -->|stageEvent=21| Render
 
-    G --> P{Left Mouse Button Pressed?}
-    P -->|Yes| Q[Create Bullet and Attack]
-    P -->|No| R[Wait for Next Input]
+    CheckStageEvent -- 21 --> Instruction2["顯示說明頁面 insUDLR1"]
+    Instruction2 --> ClickTo0["點擊螢幕"] -->|stageEvent=0| Render
 
-    G --> S{Space Pressed for Dodge?}
-    S -->|Yes| T[Trigger Player Dodge]
-    S -->|No| U[Wait for Next Input]
+    %% ========== Gameplay ==========
+    CheckStageEvent -- 1 --> Game["遊戲畫面開始"]
 
-    G --> V{R Pressed for Heal?}
-    V -->|Yes| W[Increase Player Health]
-    V -->|No| X[Wait for Next Input]
+    Game --> TimerCheck["第一次進入時: 啟動 Timer 產生怪物"]
+    Game --> KeyInput["keyClicked(): 方向鍵控制移動 & 發射 SPACE"]
+    KeyInput --> AddBullet["產生 wizardBullet 並加入 allObjs"]
 
-    G --> Y{Esc Pressed to Pause?}
-    Y -->|Yes| Z[Pause Game]
-    Y -->|No| AA[Continue Game]
+    Game --> UpdateLoop["遍歷 allObjs 執行 update() & draw()"]
+    UpdateLoop --> CheckCollision{"是否子彈碰到怪物？"}
 
-    AA --> BB{Collision Detected?}
-    BB -->|Yes| CC[Handle Player Damage and Knockback]
-    BB -->|No| DD[Continue Game Loop]
+    CheckCollision -- 是 --> Damage["怪物血量 -1, POINT+1"]
+    Damage --> IsDead{"血量 <= 0？"}
+    IsDead -- 是 --> RemoveMonster["移除怪物"]
+    IsDead -- 否 --> SkipDamage["不做事"]
 
-    DD --> E
+    CheckCollision -- 否 --> ContinueGame["持續遊戲"]
 
-    F --> E
-    Z --> E
-    U --> G
-    X --> G
-    R --> G
-    Q --> G
-    N --> G
-    T --> G
-    W --> G
-    I --> G
-    J --> G
-    O --> G
-    CC --> G
-    D --> EE[Game Over Screen]
-    EE --> FF[End]
+    UpdateLoop --> CheckWin{"monster3 是否死亡？"}
+    CheckWin -- 是 --> Win["Win: 清除所有物件, 重設資料, 返回 Menu"]
+    CheckWin -- 否 --> CheckLose
 
-    style A fill:#f9f,stroke:#333,stroke-width:4px
-    style D fill:#f9f,stroke:#333,stroke-width:4px
-    style EE fill:#f9f,stroke:#333,stroke-width:4px
+    CheckLose{"是否只剩 wizardPlayer？"}
+    CheckLose -- 是 --> Lose["Lose: 清除所有物件, 重設資料, 返回 Menu"]
+    CheckLose -- 否 --> Render
+
+    %% ========== Others ==========
+    CheckStageEvent -- 3 --> Cheat["作弊模式 (未實作畫面)"] --> Render
+
+    Win --> Render
+    Lose --> Render
+    ContinueGame --> Render
+    RemoveMonster --> Render
+    SkipDamage --> Render
+    AddBullet --> Render
+    TimerCheck --> Render
 
 ```
 
