@@ -31,8 +31,8 @@
 
 ### 下載完整repo後開啟Terminal執行以下指令
 ```
-cd exe
-java -jar SpaceInvader.jar
+cd .\lwjgl3\build\libs\
+java -jar starwar-1.0.0.jar
 ```
 
 ## 檔案重點結構
