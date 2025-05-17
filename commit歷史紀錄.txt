@@ -1,0 +1,188 @@
+commit 1f7c42e79a2659c544fb3f3ab9a2d2946e2bf48c (HEAD -> main, origin/main, origin/HEAD)
+Merge: 8c00ee5 7dcc397
+Author: Wang11007104 <shizhuc400@gmail.com>
+Date:   Fri May 16 16:08:29 2025 +0800
+
+    Merge branch 'main' of https://github.com/Wang11007104/JavaFinalProject
+
+commit 8c00ee5303aa7b86c94ec9ad6cf8987b2890a5f6
+Author: Wang11007104 <shizhuc400@gmail.com>
+Date:   Fri May 16 16:07:59 2025 +0800
+
+    5/16 description
+
+commit 7dcc39733c0f8ad57f9cb5c7879172542111b613
+Author: Wang11007104 <shizhuc400@gmail.com>
+Date:   Fri May 16 07:10:29 2025 +0800
+
+    Update README.md
+
+commit 7ec7db990d5c473a62d4cfada6afafdc8688e0d6
+Author: Wang11007104 <shizhuc400@gmail.com>
+Date:   Fri May 16 07:07:50 2025 +0800
+
+    Update README.md
+
+commit 51fed1279650ab69e83aac6d60f2f4c6d9668b67
+Author: Wang11007104 <shizhuc400@gmail.com>
+Date:   Fri May 16 07:04:03 2025 +0800
+
+    Update README.md
+
+commit 1d8eb7d6790713764a7cd655592569a2b0477477
+Author: Wang11007104 <shizhuc400@gmail.com>
+Date:   Mon May 12 00:29:06 2025 +0800
+
+    5/12
+
+commit 9036f4b2367b399858ffe40572101288462f23bc
+Merge: c08752e 3bf8b04
+Author: Wang11007104 <shizhuc400@gmail.com>
+Date:   Mon May 12 00:14:11 2025 +0800
+
+    Merge branch 'main' of https://github.com/Wang11007104/JavaFinalProject
+
+commit c08752e82ce76c1a00e94126b699619b2cb39f0c
+Author: Wang11007104 <shizhuc400@gmail.com>
+Date:   Mon May 12 00:08:01 2025 +0800
+
+    5/12
+
+commit 3bf8b04ab0436c34737e5c431b4ce312d40354c3
+Author: RegYL9217 <uj92917@gmail.com>
+Date:   Sun May 11 23:35:04 2025 +0800
+
+    環狀怪 隨機生成5/11
+
+commit 857e9552da9b48adbf39a68a86f48cc488e98edb
+Author: RegYL9217 <uj92917@gmail.com>
+Date:   Sun May 11 23:23:25 2025 +0800
+
+    結算畫面 5/11
+
+commit 7da184781780deb8a84f0104bb80dce1deb9427c
+Author: RegYL9217 <uj92917@gmail.com>
+Date:   Sun May 11 23:18:36 2025 +0800
+
+    畫面
+
+commit 4ab41546f9b97c0a44e5f7d0cb03d095b1b3eab9
+Author: RegYL9217 <uj92917@gmail.com>
+Date:   Sun May 11 23:17:36 2025 +0800
+
+    畫面結算 5/11
+
+commit 5bb1ca3838742e74ff0225b68bb9d5027d358b45
+Author: RegYL9217 <uj92917@gmail.com>
+Date:   Sun May 11 22:40:34 2025 +0800
+
+    畫面結算 5/11
+
+commit 39f642db2da8435fac32eee8fb12fdb5c8cd799a
+Author: RegYL9217 <uj92917@gmail.com>
+Date:   Sun May 11 22:12:39 2025 +0800
+
+    結算畫面 5/11
+
+commit 95b20593b393e0f516934798a1b833ad71cda3ce
+Author: RegYL9217 <uj92917@gmail.com>
+Date:   Sun May 11 21:39:03 2025 +0800
+
+    環狀
+
+commit f4018d5c429aa748d9ed7d62d56d1f4be02730ba
+Author: RegYL9217 <uj92917@gmail.com>
+Date:   Sun May 11 21:09:17 2025 +0800
+
+    環狀怪 隨機生成5/11
+
+commit 4d2ec32245c4c415bb28db96fe47e5a9fe646551
+Author: RegYL9217 <uj92917@gmail.com>
+Date:   Sun May 11 21:06:27 2025 +0800
+
+    環狀怪 5/11
+
+commit 612f261128dfd3d0e75aa33e50f80e2a83545d41
+Author: RegYL9217 <uj92917@gmail.com>
+Date:   Sun May 11 20:01:54 2025 +0800
+
+    怪物子彈 5/11
+
+commit d3bb2ef94ec4d78566ac2bd94bc1b096314e2d6a
+Author: RegYL9217 <uj92917@gmail.com>
+Date:   Sun May 11 20:01:35 2025 +0800
+
+    血量 5/11
+
+commit 633d48b96a8a0e5d78dd5bd01d8f0b032746a132
+Author: RegYL9217 <uj92917@gmail.com>
+Date:   Sun May 11 20:01:08 2025 +0800
+
+    怪物子彈 5/11
+
+commit 7be54095991289a826656d779a1e9b59248c63e2
+Author: RegYL9217 <uj92917@gmail.com>
+Date:   Sun May 11 20:00:48 2025 +0800
+
+    血量 5/11
+
+commit 233cde4d2a279e7c2409b357b8d57176c333dc49
+Author: RegYL9217 <uj92917@gmail.com>
+Date:   Sun May 11 19:48:52 2025 +0800
+
+    5/11
+
+commit 8b4bba684064e88a740bbfd87c5e4cc4d2261ed0
+Author: RegYL9217 <uj92917@gmail.com>
+Date:   Sun May 11 19:48:19 2025 +0800
+
+    5/11
+
+commit 63e08f377e6a62fa191d7ecad837a875002706fa
+Author: Wang11007104 <shizhuc400@gmail.com>
+Date:   Sun May 11 19:41:06 2025 +0800
+
+    Update mermaid.docx
+
+commit 659de9c344956e6d3e677d3b12eee7c60c36c237
+Author: Wang11007104 <shizhuc400@gmail.com>
+Date:   Mon May 5 03:54:35 2025 +0800
+
+    ins
+
+commit db2663163dc9dcad29c91cd0a9dae49a0ffb8a0d
+Author: Wang11007104 <shizhuc400@gmail.com>
+Date:   Sat May 3 01:07:50 2025 +0800
+
+    使用手冊
+
+commit 0b0d388ff9fe2bfd75cfa2bb8fa4c25a65159dd2
+Author: Wang11007104 <shizhuc400@gmail.com>
+Date:   Sat May 3 00:47:43 2025 +0800
+
+    to other computer
+
+commit 1b0196f7148f19698ca0bc97f9889242516be71c
+Author: Wang11007104 <shizhuc400@gmail.com>
+Date:   Fri May 2 22:51:34 2025 +0800
+
+    move
+
+commit b59c09158cc1c53103edff2b3ce6a44c4e8c693e
+Author: Wang11007104 <shizhuc400@gmail.com>
+Date:   Fri May 2 15:56:14 2025 +0800
+
+    5/2實現point
+
+commit 46b000acb71ab2d6311b5009d08052637b29037a
+Author: Wang11007104 <shizhuc400@gmail.com>
+Date:   Tue Apr 22 22:56:14 2025 +0800
+
+    到4/22的進度
+
+commit 3522d3610e1f849331efda3b743daa56a5437568
+Author: Wang11007104 <shizhuc400@gmail.com>
+Date:   Tue Apr 22 15:23:37 2025 +0800
+
+    Initial commit
+(END)
