@@ -5,8 +5,9 @@
   王星凱B11007104
   
 - 分工說明：
+  
   王星凱:
-  程式架構、功能構想、程式介紹
+  程式架構、遊戲介面、功能構想與實現、程式介紹、完善.md檔、git log、流程圖、類別圖、時序圖
   撰寫內容(詳情見下方功能表):1~12
   
   連羽健:
@@ -14,7 +15,8 @@
   撰寫內容(詳情見下方功能表):3~12
   
 - [報告影片連結]()
-
+- [git log連結](https://github.com/Wang11007104/JavaFinalProject/blob/main/commit%E6%AD%B7%E5%8F%B2%E7%B4%80%E9%8C%84.txt)
+- [doc.html連結](file:///C:/Users/User/OneDrive/Documents/JavaFinalProject/lwjgl3/build/docs/javadoc/com/wxk/starwar/lwjgl3/SkyWizard.html)
 ## 遊戲說明
 
 ### 1. 遊戲流程
@@ -345,6 +347,14 @@ end
 
 Player -> SkyWizard : 點擊螢幕返回
 SkyWizard -> SkyWizard : 重置資料 / 回主畫面
+
+## 五、與 ChatGPT 的協作紀錄摘要
+- 學習LibGDX框架與語法(create、render、左下角為(0，0)、圖片呼叫方式)
+- 版本與libGDX相容性
+- 修整build.gradle的各種設定
+- vscode與libGDX的相容性
+- 不同大小圓點由上而下寫法
+
 
 
 

@@ -108,27 +108,9 @@ Date:   Sun May 11 20:01:54 2025 +0800
 
     怪物子彈 5/11
 
-commit d3bb2ef94ec4d78566ac2bd94bc1b096314e2d6a
-Author: RegYL9217 <uj92917@gmail.com>
-Date:   Sun May 11 20:01:35 2025 +0800
-
-    血量 5/11
-
-commit 633d48b96a8a0e5d78dd5bd01d8f0b032746a132
-Author: RegYL9217 <uj92917@gmail.com>
-Date:   Sun May 11 20:01:08 2025 +0800
-
-    怪物子彈 5/11
-
 commit 7be54095991289a826656d779a1e9b59248c63e2
 Author: RegYL9217 <uj92917@gmail.com>
 Date:   Sun May 11 20:00:48 2025 +0800
-
-    血量 5/11
-
-commit 233cde4d2a279e7c2409b357b8d57176c333dc49
-Author: RegYL9217 <uj92917@gmail.com>
-Date:   Sun May 11 19:48:52 2025 +0800
 
     5/11
 
