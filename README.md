@@ -349,15 +349,16 @@ end
 Player -> SkyWizard : 點擊螢幕返回
 SkyWizard -> SkyWizard : 重置資料 / 回主畫面
 
-## 五、與 ChatGPT 的協作紀錄摘要
-- 學習LibGDX框架與語法(create、render、左下角為(0，0)、圖片呼叫方式)
-- 版本與libGDX相容性
-- 修整build.gradle的各種設定
-- vscode與libGDX的相容性
-- 不同大小圓點由上而下寫法
+
 
 
 
 
 
 ```
+## 五、與 ChatGPT 的協作紀錄摘要
+- 學習LibGDX框架與語法(create、render、左下角為(0，0)、圖片呼叫方式)
+- 版本與libGDX相容性
+- 修整build.gradle的各種設定
+- vscode與libGDX的相容性
+- 不同大小圓點由上而下寫法
