@@ -93,7 +93,6 @@ JavaFinalProject\assets/
  ┗ 📜wizard.png
 ```
 
-# [SkyWizard]()
 
 ## 一、SkyWizard 基礎功能列表
 
