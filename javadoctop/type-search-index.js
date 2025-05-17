@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"com.wxk.starwar.lwjgl3","l":"autoMonster"},{"p":"com.wxk.starwar.lwjgl3","l":"DesktopLauncher"},{"p":"com.wxk.starwar.lwjgl3","l":"movingObj"},{"p":"com.wxk.starwar.lwjgl3","l":"SkyWizard"}];updateSearchResults();
