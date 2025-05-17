@@ -35,26 +35,62 @@ cd exe
 java -jar SpaceInvader.jar
 ```
 
-## 檔案結構
+## 檔案重點結構
 ```
-Space_Invader/
-├── src/
-│   ├── SpaceInvader.java
-│   ├── MusicPlayer.java
-│   └── ... 
-├── exe/
-│   ├── SpaceInvader.jar
-│   ├── SpaceInvader.class
-│   ├── MusicPlayer.class
-│   ├── ...
-│   └── music/
-│       ├── StartMenu.wav
-│       └── ...
-├── music/
-│   ├── StartMenu.wav
-│   └── ...
-├── docs/
-└── README.md
+JavaFinalProject\lwjgl3/
+ ┣ 📂build
+ ┃ ┣ 📂libs
+ ┃ ┃ ┗ 📜starwar-1.0.0.jar
+ ┣ 📂src
+ ┃ ┗ 📂main
+ ┃ ┃ ┣ 📂java
+ ┃ ┃ ┃ ┗ 📂com
+ ┃ ┃ ┃ ┃ ┗ 📂wxk
+ ┃ ┃ ┃ ┃ ┃ ┗ 📂starwar
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂lwjgl3
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜autoMonster.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜DesktopLauncher.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜movingObj.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜SkyWizard.java
+ ┃ ┣ 📂docs
+ ┃ ┃ ┗ 📂javadoc
+ ┃ ┃ ┃ ┣ 📂com
+ ┃ ┃ ┃ ┃ ┗ 📂wxk
+ ┃ ┃ ┃ ┃ ┃ ┗ 📂starwar
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂lwjgl3
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜autoMonster.html
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜DesktopLauncher.html
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜movingObj.html
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜package-summary.html
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜package-tree.html
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜SkyWizard.html
+
+JavaFinalProject\assets/
+ ┣ 📜assets.txt
+ ┣ 📜bgm.mp3
+ ┣ 📜bigbu.png
+ ┣ 📜buttonCheat.png
+ ┣ 📜buttonIns.png
+ ┣ 📜buttonLevel.png
+ ┣ 📜buttonplay.png
+ ┣ 📜desktop.ini
+ ┣ 📜dragon1.png
+ ┣ 📜dragon12.png
+ ┣ 📜explode.png
+ ┣ 📜fire.mp3
+ ┣ 📜fire.png
+ ┣ 📜firstscreen.png
+ ┣ 📜ghost.png
+ ┣ 📜insSpace.png
+ ┣ 📜insSpace1.png
+ ┣ 📜insUDLR.png
+ ┣ 📜insUDLR1.png
+ ┣ 📜libgdx.png
+ ┣ 📜monfire.png
+ ┣ 📜monster2.png
+ ┣ 📜redboss.png
+ ┣ 📜supper.png
+ ┗ 📜wizard.png
 ```
 
 # [SkyWizard]()
