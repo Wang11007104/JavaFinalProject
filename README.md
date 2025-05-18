@@ -17,7 +17,7 @@
   程式修改、簡報介紹、影片錄影
   撰寫內容(詳情見下方功能表):3~12
   
-- [報告影片連結]()
+- [報告影片連結](https://youtu.be/gQUdFspdjcs)
 - [git log連結](https://github.com/Wang11007104/JavaFinalProject/blob/main/commit%E6%AD%B7%E5%8F%B2%E7%B4%80%E9%8C%84.txt)
 - [doc.html連結](https://github.com/Wang11007104/JavaFinalProject/tree/main/javadoctop)
 - [.jar檔連結](https://github.com/Wang11007104/JavaFinalProject/tree/main/libs)
