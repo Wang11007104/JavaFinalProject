@@ -1,8 +1,11 @@
 
 # 2025 JAVA 期末專案
 - 成員：
-  連羽健B11230227
+  
   王星凱B11007104
+  
+  連羽健B11230227
+  
   
 - 分工說明：
   
@@ -14,10 +17,10 @@
   程式修改、簡報介紹、影片錄影
   撰寫內容(詳情見下方功能表):3~12
   
-- [報告影片連結]()
+- [報告影片連結](https://youtu.be/gQUdFspdjcs)
 - [git log連結](https://github.com/Wang11007104/JavaFinalProject/blob/main/commit%E6%AD%B7%E5%8F%B2%E7%B4%80%E9%8C%84.txt)
 - [doc.html連結](https://github.com/Wang11007104/JavaFinalProject/tree/main/javadoctop)
-- 
+- [.jar檔連結](https://github.com/Wang11007104/JavaFinalProject/tree/main/libs)
 ## 遊戲說明
 
 ### 1. 遊戲流程
@@ -34,7 +37,7 @@
 
 ### 下載完整repo後開啟Terminal執行以下指令
 ```
-cd .\lwjgl3\build\libs\
+cd .\libs\
 java -jar starwar-1.0.0.jar
 ```
 
